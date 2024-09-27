@@ -1,0 +1,20 @@
+﻿{
+    "ServerSQL": "172.16.101.82",
+    "User": "devdb",
+    "Password": "M3pi3L2023",
+    "MailRemitente": "desarrollo@grupomepiel.com.mx",
+    "MailDestinatarioError": "abraham.jimenez@mepiel.com.mx",
+    "DbSql" : "quotes",
+    "HanaConec" : "Server=Hanab1:30013;UserID=SYSTEM;Password=B1AdminH2;Database=NDB",
+    "DbSap" : "SB1CSL",
+    "Name" : "Oferta_Ventas_",
+    "HanaServidor" : "172.16.21.249:30015",
+    "SapDBpass" : "B1AdminH2",
+    "DBNameTest" : "SAPTESTAF",
+    "UserSAP" : "VentasRepresentante",
+    "PswSap" : "Mepiel123@",
+    "Ip" : "172.16.21.1",
+    "UsuarioApi" : "EcommerceMEPIEL",
+    "ContraseñaApi" : "Mepiel24",
+    "Token" : "eQLYstqvnWJCRkdSjyb/xUQco7P72u7Qy70JWg+9+zjeLjR49IcAWcNhE4Xe0DUi"
+}
