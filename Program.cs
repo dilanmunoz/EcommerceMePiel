@@ -17,12 +17,11 @@ builder.Services.AddCors(p => p.AddPolicy("politicaCors", build =>
 }));
 
 // Add services to the container.
-builder.Services.AddControllers();
-    //.AddJsonOptions(options =>
-    //{
-    //    // Aquí puedes configurar opciones JSON, como la profundidad máxima
-    //    options.JsonSerializerOptions.MaxDepth = 64; // Ajusta según tus necesidades
-    //});
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null; // Para respetar mayúsculas
+    });
 
 // Configuración de tamaño máximo para solicitudes (opcional)
 builder.Services.Configure<FormOptions>(options =>

@@ -27,6 +27,7 @@ C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.0\EcommerceMePiel.csproj.CoreCompileInputs.cache
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.0\EcommerceMePiel.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.0\EcommerceMePiel.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.0\EcommerceMePiel.sourcelink.json
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.0\staticwebassets.build.json
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.0\staticwebassets.development.json
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\x64\Release\net8.0\staticwebassets\msbuild.EcommerceMePiel.Microsoft.AspNetCore.StaticWebAssets.props

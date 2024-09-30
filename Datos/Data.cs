@@ -289,7 +289,7 @@ namespace EcommerceMePiel.Datos
             string Universal = string.Empty;
 
             string DB = string.Empty;
-            int counter = 0;
+            //int counter = 0;
 
             string StrSql = string.Empty;
 
@@ -365,10 +365,10 @@ namespace EcommerceMePiel.Datos
 
                         while (reader.Read())
                         {
-                            counter++;
+                            //counter++;
                             var producto = new Producto
                             {
-                                Id = counter,
+                                //Id = counter,
                                 CodigoSAP = reader.IsDBNull(0) ? "No data" : reader.GetString(0),
                                 SKU = reader.IsDBNull(1) ? "No data" : reader.GetString(1),
                                 Descripcion = reader.IsDBNull(2) ? "No data" : reader.GetString(2),

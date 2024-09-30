@@ -41,3 +41,4 @@ C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\Release\net8.0\re
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\Release\net8.0\EcommerceMePiel.pdb
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\Release\net8.0\EcommerceMePiel.genruntimeconfig.cache
 C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\Release\net8.0\ref\EcommerceMePiel.dll
+C:\Users\abraham.jimenez\Desktop\Proyectos\EcommerceMePiel\obj\Release\net8.0\EcommerceMePiel.sourcelink.json
