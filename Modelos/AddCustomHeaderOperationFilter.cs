@@ -25,7 +25,7 @@ namespace EcommerceMePiel.Modelos
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Required = true, // Cambia a true si es obligatorio
-                    Description = "Encabezado Authorization",
+                    Description = "Token de autorización para acceder a este endpoint.",
                     Schema = new OpenApiSchema { Type = "string" }
                 });
             }

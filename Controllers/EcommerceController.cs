@@ -19,14 +19,14 @@ namespace EcommerceMePiel.Controllers
         [SwaggerOperation(
         Summary = "Obtener todos los productos de la base de datos de SAP",
         Description = "Este servicio se encarga de obtener todos los productos disponibles en la base de datos de SAP.")]
-        //[ResponseCache(Duration = 10)]
+        [ResponseCache(Duration = 10)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [CustomHeaderRequired] // Este endpoint requiere el encabezado
         [Route("GetProducts")]
-        public IActionResult obtenerProductos([FromHeader(Name = "Authorization")] string authorization)
+        public IActionResult obtenerProductos([FromHeader(Name = "Authorization")] string Authorization)
         {
             //token_On_Request = Request.Headers.Where(x => x.Key == "Authorization").FirstOrDefault().Value;
 
@@ -41,12 +41,12 @@ namespace EcommerceMePiel.Controllers
                 //    }
                 //}
 
-                if (!string.IsNullOrEmpty(authorization))
+                if (!string.IsNullOrEmpty(Authorization))
                 {
 
                     string ValidToken = Data.Get_Parameterizations("Token");
 
-                    if (ValidToken == authorization)
+                    if (ValidToken == Authorization)
                     {
                         List<Producto> a = Data.obtenerProductos();
 
@@ -118,7 +118,8 @@ namespace EcommerceMePiel.Controllers
         }
 
 
-        [HttpGet]
+        //[HttpGet]
+        [HttpGet("GetToken/{usuario},{contraseña}", Name = "GetToken")]
         [SwaggerOperation(
         Summary = "Obtener Token",
         Description = "Este servicio se encarga de generar un token a partir de un usuario y contraseña.")]
@@ -126,7 +127,7 @@ namespace EcommerceMePiel.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Route("GetToken")]
+        //[Route("GetToken")]
         public IActionResult GetToken(string usuario, string contraseña)
         {
             try
@@ -168,6 +169,7 @@ namespace EcommerceMePiel.Controllers
         }
 
 
+        #region codigo de pruebas comentado
         //[HttpGet("endpoint")]
         //[CustomHeaderRequired] // Este endpoint requiere el encabezado
         //public IActionResult GetData([FromHeader(Name = "Authorization")] string authorization)
@@ -191,5 +193,70 @@ namespace EcommerceMePiel.Controllers
 
         //    return Ok("Token recibido: " + token);
         //}
+        #endregion
+
+
+        [HttpGet("GetXmlPdf/{DocNum:int}", Name = "GetDocument")]
+        [SwaggerOperation(
+        Summary = "Método para obtener documentos.",
+        Description = "Este servicio se encarga de obtener el documento PDF y el XML a partir del número de documento.")]
+        [ResponseCache(Duration = 10)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //[Route("GetXmlPdf")]
+        public IActionResult GetDocument(int DocNum)
+        {
+            try
+            {
+                // LLamado de funcion para traer DocNumData
+                DocNumData data = Data.GetDocumentData(DocNum);
+
+                if (data.Equals(null) || data.UUID == null || data.UUID == "")
+                {
+                    Response<Conflicto> response = new Response<Conflicto>();
+                    response.Exito = false;
+
+                    Conflicto conflicto = new Conflicto();
+                    conflicto.Descripcion = "Documento no encontrado";
+                    conflicto.Codigo = 404;
+
+                    response.Respuesta = conflicto;
+                    return NotFound(response);
+                }
+
+                // LLamado de funcion para traer documentos
+                var Documentos = Data.GetDocumentos(data);
+
+                if (data.Equals(null))
+                {
+                    Response<Conflicto> response = new Response<Conflicto>();
+                    response.Exito = false;
+
+                    Conflicto conflicto = new Conflicto();
+                    conflicto.Descripcion = "Documento no encontrado";
+                    conflicto.Codigo = 404;
+
+                    response.Respuesta = conflicto;
+                    return NotFound(response);
+                }
+
+                return Ok(Documentos);
+            }
+            catch (Exception ex)
+            {
+                Response<Conflicto> response = new Response<Conflicto>();
+                response.Exito = false;
+
+                Conflicto conflicto = new Conflicto();
+                conflicto.Descripcion = "Error al obtener documentos";
+                conflicto.Codigo = 500;
+
+                response.Respuesta = conflicto;
+                return StatusCode(500, response);
+            }
+        }
+
+
     }
 }

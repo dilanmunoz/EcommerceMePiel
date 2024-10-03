@@ -16,5 +16,8 @@
     "Ip" : "172.16.21.1",
     "UsuarioApi" : "EcommerceMEPIEL",
     "ContraseñaApi" : "Mepiel24",
-    "Token" : "eQLYstqvnWJCRkdSjyb/xUQco7P72u7Qy70JWg+9+zjeLjR49IcAWcNhE4Xe0DUi"
+    "Token" : "eQLYstqvnWJCRkdSjyb/xUQco7P72u7Qy70JWg+9+zjeLjR49IcAWcNhE4Xe0DUi",
+    "RedUser" : "SISTEMAS",
+    "RedPassword" : "v3Sp42023@"
+
 }

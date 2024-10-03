@@ -1,6 +1,7 @@
 using EcommerceMePiel.Datos;
 using EcommerceMePiel.Modelos;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -34,7 +35,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });
+    //c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });
     c.EnableAnnotations(); // Asegúrate de habilitar anotaciones
     // Agregar encabezado personalizado
     c.OperationFilter<AddCustomHeaderOperationFilter>();
@@ -60,6 +61,24 @@ builder.Services.AddSwaggerGen(c =>
     //        new string[] {}
     //    }
     //});
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1.0",
+        Title = "Api E-Commerce Mepiel",
+        Description = "Primera version",
+        //TermsOfService = new Uri("https://google.com.mx"),
+        Contact = new OpenApiContact
+        {
+            Name = "Abraham Jimenez",
+            Email = "abraham.jimenez@mepiel.com.mx",
+
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Licencia Personal",
+            //Url = new Uri("https://google.com.mx")
+        }
+    });
 });
 
 // Agregar la compresión de respuestas

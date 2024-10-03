@@ -10,6 +10,10 @@ using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
+using System.Security;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace EcommerceMePiel.Datos
 {
@@ -93,6 +97,12 @@ namespace EcommerceMePiel.Datos
                         break;
                     case "Token":
                         yourData = jsonObject.Token;
+                        break;
+                    case "RedPassword":
+                        yourData = jsonObject.RedPassword;
+                        break;
+                    case "RedUser":
+                        yourData = jsonObject.RedUser;
                         break;
                 }
 
@@ -304,8 +314,8 @@ namespace EcommerceMePiel.Datos
                     //DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
                     DB = Get_Parameterizations("DbSap");
 
-                    
-                            StrSql = $@"SELECT DISTINCT 
+
+                    StrSql = $@"SELECT DISTINCT 
                                         T0.""ItemCode"" ""CodigoSAP"",
                                         T0.""CodeBars"" ""SKU"",
                                         ifnull(T0.""ItemName"",'Sin datos') ""Descripcion"",
@@ -357,7 +367,7 @@ namespace EcommerceMePiel.Datos
                                         group by T0.""ItemCode"", T0.""CodeBars"", T0.""ItemName"",T0.""U_Marca"",T2.""CardName"", T0.""validFor"",T0.""U_Estatus"",T0.""QryGroup1"",T0.""QryGroup2"",T0.""QryGroup3"",T0.""QryGroup4"",T0.""QryGroup5"",T0.""QryGroup6"",T0.""QryGroup6"",T0.""QryGroup7"",T0.""QryGroup8"",T0.""QryGroup9"",T0.""QryGroup10"",T0.""QryGroup11"",T0.""QryGroup12"",T0.""QryGroup13"",T0.""QryGroup14"",T0.""QryGroup15"",T0.""QryGroup16"",T0.""QryGroup17"",T0.""QryGroup18"",T0.""QryGroup19"",T0.""QryGroup20"",T0.""QryGroup21"",T0.""QryGroup22"",T0.""QryGroup23""
 
                                         ORDER BY T0.""ItemCode"" asc";
-                            
+
 
                     using (var cmd = new HanaCommand(StrSql, Con))
                     using (var reader = cmd.ExecuteReader())
@@ -751,6 +761,151 @@ namespace EcommerceMePiel.Datos
 
         //Metodo para aumentar tamaño
 
+        #endregion
+
+
+        #region Metodos en servicio GetDocument
+
+        protected static readonly string Path_Pdf = "\\\\172.16.21.249\\b1_shf\\Companies\\SB1CSL\\anexos\\BOVEDA FACTURAS MEPIEL\\";
+
+        protected static readonly string Path_Xml = "\\\\172.16.21.249\\b1_shf\\Companies\\SB1CSL\\XMLTEST\\hanab1\\SB1CSL\\CFDi\\SALC670519A59\\";
+
+        //Consulta DocNumData
+        public static DocNumData GetDocumentData(int DocNum)
+        {
+            DocNumData Data = new DocNumData();
+            string Universal = string.Empty;
+
+            string DB = string.Empty;
+
+            string StrSql = string.Empty;
+
+            try
+            {
+                //Conexion a SAP
+                using (var Con = new HanaConnection(Get_Parameterizations("HanaConec")))
+                {
+                    Con.Open();
+
+                    //DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+                    DB = Get_Parameterizations("DbSap");
+
+
+                    StrSql =
+                        $@"
+SELECT
+    T0.""CardCode"" AS ""Codigo de cliente"",
+    T0.""CardName"" AS ""Nombre de cliente"",
+    TO_VARCHAR(T0.""DocDate"", 'YYYY-MM') AS ""Fecha de factura"",
+    T1.""ReportID""
+FROM
+    {DB}.OINV T0
+LEFT OUTER JOIN
+    {DB}.ECM2 T1 ON T0.""DocEntry"" = T1.""SrcObjAbs""
+WHERE
+    T0.""DocNum"" = '{DocNum}'";
+
+
+                    using (var cmd = new HanaCommand(StrSql, Con))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+                            //counter++;
+                            Data = new DocNumData()
+                            {
+
+                                CardCode = reader.GetString(0),
+                                CardName = reader.GetString(1),
+                                Date = reader.GetString(2),
+                                UUID = reader.IsDBNull(0) ? "" : reader.GetString(3),
+
+                            };
+
+                            if (Data.UUID == "")
+                            {
+                                return new DocNumData();
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = $"Error al obtener datos de factura {DocNum}, {ex.Message.ToString()} ";
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+
+                return new DocNumData();
+
+            }
+
+            return Data;
+        }
+
+        //Metodo principal traer documentos
+        public static Documentos GetDocumentos(DocNumData Data)
+        {
+            var Full_Path_Pdf = Path_Pdf + $@"{Data.CardName}\I\";
+            var Full_Path_Xml = Path_Xml + $@"{Data.Date}\{Data.CardCode}\RF\";
+
+            Documentos documentos = ReadFiles(Full_Path_Pdf, Full_Path_Xml,Data.UUID);
+
+            return documentos;
+        }
+
+        //Leer documento en red.
+        public static Documentos ReadFiles(string pathpdf, string pathxml, string uuid)
+        {
+            try
+            {
+                Documentos documentos = new Documentos();
+
+                var password = Get_Parameterizations("RedPassword");
+
+                var username = Get_Parameterizations("RedUser");
+
+                // Crear password con seguridad
+                var securePassword = new SecureString();
+                foreach (char c in password)
+                {
+                    securePassword.AppendChar(c);
+                }
+
+                // Mapeo de unidad de red y lectura del archivo
+                using (new NetworkConnection(pathpdf, username, securePassword))
+                {
+                    string pdf = Path.Combine(pathpdf, $"{uuid}.pdf");
+                    byte[] fileBytes = File.ReadAllBytes(pdf);
+                    documentos.PDF_Base64 = Convert.ToBase64String(fileBytes); /*File.ReadAllText(pdf);*/
+
+                    string XML = Path.Combine(pathxml, $"{uuid}.xml");
+                    fileBytes = File.ReadAllBytes(XML);
+                    documentos.XML_BASE64 = Convert.ToBase64String(fileBytes);/*File.ReadAllText(XML);*/
+
+                }
+                return documentos;
+            }
+            catch (Exception a)
+            {
+                string error = $"Error al obtener datos de factura , {a.Message.ToString()} ";
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+
+                return new Documentos();
+            }
+
+        }
 
         #endregion
 
