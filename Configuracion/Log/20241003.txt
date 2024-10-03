@@ -1,0 +1,4 @@
+
+3/10/2024 17:02:11 Error al obtener datos de factura , Could not find file '\\172.16.21.249\b1_shf\Companies\SB1CSL\anexos\BOVEDA FACTURAS MEPIEL\BELADERMA\I\ACA86983-B925-11ED-9495-8BD2732E3590.pdf'. 
+
+3/10/2024 17:04:43 Error al obtener datos de factura , Could not find file '\\172.16.21.249\b1_shf\Companies\SB1CSL\anexos\BOVEDA FACTURAS MEPIEL\BELADERMA\I\ACA86983-B925-11ED-9495-8BD2732E3590.pdf'. 

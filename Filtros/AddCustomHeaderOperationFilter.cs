@@ -5,12 +5,14 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Linq;
 
-namespace EcommerceMePiel.Modelos
+namespace EcommerceMePiel.Filtros
 {
 
     [AttributeUsage(AttributeTargets.Method)]
     public class CustomHeaderRequiredAttribute : Attribute
     {
+
+
     }
 
     public class AddCustomHeaderOperationFilter : IOperationFilter

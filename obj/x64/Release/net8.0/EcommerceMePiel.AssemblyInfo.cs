@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EcommerceMePiel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6b0b76de72677ad3b172d59e2dcb8c0ea69bd7d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ae4f71995638b50b415bf6fbc1bc549b615bcc9")]
 [assembly: System.Reflection.AssemblyProductAttribute("EcommerceMePiel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EcommerceMePiel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

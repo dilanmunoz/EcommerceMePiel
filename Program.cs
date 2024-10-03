@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using EcommerceMePiel.Filtros;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,10 @@ builder.Services.AddResponseCaching();
 //Aqui se configuran los CORS
 builder.Services.AddCors(p => p.AddPolicy("politicaCors", build =>
 {
-    //http://localhost:3223
-    build.WithOrigins("http://localhost:5046", "https://localhost:7237","http://172.16.101.20:81", "http://localhost:81").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    build.WithOrigins("http://localhost:5046", "https://localhost:7237", "http://172.16.101.20:81", "http://localhost:81")
+         .AllowAnyMethod()
+         .AllowAnyHeader()
+         .AllowCredentials(); // No uses AllowAnyOrigin()
 }));
 
 // Add services to the container.
@@ -38,29 +41,32 @@ builder.Services.AddSwaggerGen(c =>
     //c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mi API", Version = "v1" });
     c.EnableAnnotations(); // Asegúrate de habilitar anotaciones
     // Agregar encabezado personalizado
-    c.OperationFilter<AddCustomHeaderOperationFilter>();
+    //c.OperationFilter<AddCustomHeaderOperationFilter>();
+    //c.OperationFilter<Authorization>();
     // Puedes agregar más configuraciones de Swagger aquí si es necesario
-    //c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    //{
-    //    In = ParameterLocation.Header,
-    //    Description = "Por favor ingresa el token con el prefijo 'Bearer '",
-    //    Name = "Authorization",
-    //    Type = SecuritySchemeType.ApiKey
-    //});
-    //c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    //{
-    //    {
-    //        new OpenApiSecurityScheme
-    //        {
-    //            Reference = new OpenApiReference
-    //            {
-    //                Type = ReferenceType.SecurityScheme,
-    //                Id = "Bearer"
-    //            }
-    //        },
-    //        new string[] {}
-    //    }
-    //});
+    c.AddSecurityDefinition("Authorization", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Por favor ingresa el token con el prefijo {token}",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer"
+
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Authorization"
+                }
+            },
+            new string[] {}
+        }
+    });
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1.0",
