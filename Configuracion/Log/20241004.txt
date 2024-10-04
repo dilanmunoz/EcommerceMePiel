@@ -1,0 +1,2 @@
+
+4/10/2024 11:21:19 Error al obtener datos de factura , Could not find file '\\172.16.21.249\b1_shf\Companies\SB1CSL\anexos\BOVEDA FACTURAS MEPIEL\ESTRADA OCHOA MARIA DE CARMEN\I\A5A72B4B-B83F-11ED-A970-BB09CE294982.pdf'. 

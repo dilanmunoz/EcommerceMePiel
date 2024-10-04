@@ -102,9 +102,12 @@ namespace EcommerceMePiel.Controllers
 
                     string ValidToken = Data.Get_Parameterizations("Token");
 
+                    string ValidTokenTest = Data.Get_Parameterizations("TokenTest");
+
                     if (ValidToken == Authorization)
                     {
-                        List<Producto> a = Data.obtenerProductos();
+
+                        List<Producto> a = Data.obtenerProductos("YES");
 
                         if (a.Count < 1)
                         {
@@ -123,13 +126,43 @@ namespace EcommerceMePiel.Controllers
                             };
 
                             // Calcular el tamaño de la respuesta en bytes
-                            string jsonResponse = JsonSerializer.Serialize(response);
-                            long responseSize = System.Text.Encoding.UTF8.GetByteCount(jsonResponse);
+                            //string jsonResponse = JsonSerializer.Serialize(response);
+                            //long responseSize = System.Text.Encoding.UTF8.GetByteCount(jsonResponse);
 
                             // Opcional: Puedes registrar el tamaño o devolverlo en el encabezado
                             //Response.Headers.Add("X-Response-Size", responseSize.ToString());
 
-                            return Ok(jsonResponse);
+                            return Ok(response);
+                        }
+                    }
+                    else if(ValidTokenTest == Authorization)
+                    {
+                        List<Producto> a = Data.obtenerProductos("NO");
+
+                        if (a.Count < 1)
+                        {
+                            Response<Conflicto> response = new Response<Conflicto>();
+                            response.Exito = false;
+                            response.Respuesta.Descripcion = "Error al obtener listado de productos";
+                            response.Respuesta.Codigo = 404;
+                            return NotFound(response);
+                        }
+                        else
+                        {
+                            Response<List<Producto>> response = new Response<List<Producto>>()
+                            {
+                                Exito = true,
+                                Respuesta = a
+                            };
+
+                            // Calcular el tamaño de la respuesta en bytes
+                            //string jsonResponse = JsonSerializer.Serialize(response);
+                            //long responseSize = System.Text.Encoding.UTF8.GetByteCount(jsonResponse);
+
+                            // Opcional: Puedes registrar el tamaño o devolverlo en el encabezado
+                            //Response.Headers.Add("X-Response-Size", responseSize.ToString());
+
+                            return Ok(response);
                         }
                     }
                     else
@@ -236,11 +269,13 @@ namespace EcommerceMePiel.Controllers
 
                         string ValidToken = Data.Get_Parameterizations("Token");
 
+                        string ValidTokenTest = Data.Get_Parameterizations("TokenTest");
+
                         if (ValidToken == Authorization)
                         {
 
                             // LLamado de funcion para traer DocNumData
-                            DocNumData data = Data.GetDocumentData(DocNum);
+                            DocNumData data = Data.GetDocumentData(DocNum,"YES");
 
                             if (data.Equals(null) || data.UUID == null || data.UUID == "")
                             {
@@ -259,6 +294,42 @@ namespace EcommerceMePiel.Controllers
                             var Documentos = Data.GetDocumentos(data);
 
                             if (Documentos.Equals(null)|| Documentos.PDF_Base64 == null)
+                            {
+                                Response<Conflicto> response = new Response<Conflicto>();
+                                response.Exito = false;
+
+                                Conflicto conflicto = new Conflicto();
+                                conflicto.Descripcion = "Documento no encontrado";
+                                conflicto.Codigo = 404;
+
+                                response.Respuesta = conflicto;
+                                return NotFound(response);
+                            }
+
+                            return Ok(Documentos);
+                        }
+                        else if(ValidTokenTest == Authorization)
+                        {
+                            // LLamado de funcion para traer DocNumData
+                            DocNumData data = Data.GetDocumentData(DocNum,"NO");
+
+                            if (data.Equals(null) || data.UUID == null || data.UUID == "")
+                            {
+                                Response<Conflicto> response = new Response<Conflicto>();
+                                response.Exito = false;
+
+                                Conflicto conflicto = new Conflicto();
+                                conflicto.Descripcion = "Documento no encontrado";
+                                conflicto.Codigo = 404;
+
+                                response.Respuesta = conflicto;
+                                return NotFound(response);
+                            }
+
+                            // LLamado de funcion para traer documentos
+                            var Documentos = Data.GetDocumentos(data);
+
+                            if (Documentos.Equals(null) || Documentos.PDF_Base64 == null)
                             {
                                 Response<Conflicto> response = new Response<Conflicto>();
                                 response.Exito = false;

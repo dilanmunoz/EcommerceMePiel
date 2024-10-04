@@ -18,6 +18,9 @@
     "ContraseñaApi" : "Mepiel24",
     "Token" : "eQLYstqvnWJCRkdSjyb/xUQco7P72u7Qy70JWg+9+zjeLjR49IcAWcNhE4Xe0DUi",
     "RedUser" : "SISTEMAS",
-    "RedPassword" : "v3Sp42023@"
+    "RedPassword" : "v3Sp42023@",
+    "UsuarioApiTest" : "EcommerceMEPIELTest",
+    "ContraseñaApiTest" : "Mepiel24Test",
+    "TokenTest" : "cKctPTag5WakJzLqeetaLewzSuqTXsS5tC78Q9QHf+2/h/Us/LE76Geu3VAzi3dZE6iKImaIZJf3EecF5APV6A=="
 
 }

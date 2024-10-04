@@ -7,15 +7,12 @@
       "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:controllers\\ecommercecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\datos\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:datos\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Ismael\\AppData\\Local\\SourceServer\\2e29cccdf62a3430d61ce7e37687c15a9b234eeede4e5c8fb5520a9a4ac5db78\\Controllers\\EcommerceController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\configuracion\\ajustes.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:configuracion\\ajustes.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\datos\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:datos\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -37,33 +34,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EcommerceController.cs",
-              "DocumentMoniker": "C:\\Users\\Ismael\\AppData\\Local\\SourceServer\\2e29cccdf62a3430d61ce7e37687c15a9b234eeede4e5c8fb5520a9a4ac5db78\\Controllers\\EcommerceController.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\Ismael\\AppData\\Local\\SourceServer\\2e29cccdf62a3430d61ce7e37687c15a9b234eeede4e5c8fb5520a9a4ac5db78\\Controllers\\EcommerceController.cs",
-              "ToolTip": "C:\\Users\\Ismael\\AppData\\Local\\SourceServer\\2e29cccdf62a3430d61ce7e37687c15a9b234eeede4e5c8fb5520a9a4ac5db78\\Controllers\\EcommerceController.cs [Solo lectura]",
-              "RelativeToolTip": "..\\..\\..\\..\\Ismael\\AppData\\Local\\SourceServer\\2e29cccdf62a3430d61ce7e37687c15a9b234eeede4e5c8fb5520a9a4ac5db78\\Controllers\\EcommerceController.cs [Solo lectura]",
-              "ViewState": "AQIAAMsAAAAAAAAAAAApwNUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-03T23:02:04.439Z",
-              "EditorCaption": " [Solo lectura]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Ajustes.txt",
               "DocumentMoniker": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Configuracion\\Ajustes.txt",
               "RelativeDocumentMoniker": "Configuracion\\Ajustes.txt",
               "ToolTip": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Configuracion\\Ajustes.txt",
               "RelativeToolTip": "Configuracion\\Ajustes.txt",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAfAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAcwBYAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
               "WhenOpened": "2024-10-03T22:34:45.355Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -76,13 +60,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Data.cs",
               "DocumentMoniker": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Datos\\Data.cs",
               "RelativeDocumentMoniker": "Datos\\Data.cs",
               "ToolTip": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Datos\\Data.cs",
               "RelativeToolTip": "Datos\\Data.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAADgv/4CAAAIAAAA",
+              "ViewState": "AQIAACMBAAAAAAAAAAAWwGIDAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-25T17:52:16.975Z",
               "EditorCaption": ""
@@ -95,7 +79,7 @@
               "RelativeDocumentMoniker": "Controllers\\EcommerceController.cs",
               "ToolTip": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Controllers\\EcommerceController.cs",
               "RelativeToolTip": "Controllers\\EcommerceController.cs",
-              "ViewState": "AQIAAO4AAAAAAAAAAAApwAMBAAAAAAAA",
+              "ViewState": "AQIAAJEAAAAAAAAAAAAQwJgAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-25T17:41:21.85Z",
               "EditorCaption": ""

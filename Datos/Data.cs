@@ -104,6 +104,9 @@ namespace EcommerceMePiel.Datos
                     case "RedUser":
                         yourData = jsonObject.RedUser;
                         break;
+                    case "TokenTest":
+                        yourData = jsonObject.TokenTest;
+                        break;
                 }
 
             }
@@ -291,7 +294,7 @@ namespace EcommerceMePiel.Datos
         #region Metodos en servicio obtenerProductos
 
         //Metodo para obtener productos de sap
-        public static List<Producto> obtenerProductos()
+        public static List<Producto> obtenerProductos(string productive)
         {
             List<Producto> Lista = new List<Producto>();
             List<string> categorias = new List<string>();
@@ -311,8 +314,8 @@ namespace EcommerceMePiel.Datos
                 {
                     Con.Open();
 
-                    //DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
-                    DB = Get_Parameterizations("DbSap");
+                    DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+                    //DB = Get_Parameterizations("DbSap");
 
 
                     StrSql = $@"SELECT DISTINCT 
@@ -771,7 +774,7 @@ namespace EcommerceMePiel.Datos
         protected static readonly string Path_Xml = "\\\\172.16.21.249\\b1_shf\\Companies\\SB1CSL\\XMLTEST\\hanab1\\SB1CSL\\CFDi\\SALC670519A59\\";
 
         //Consulta DocNumData
-        public static DocNumData GetDocumentData(int DocNum)
+        public static DocNumData GetDocumentData(int DocNum, string productive)
         {
             DocNumData Data = new DocNumData();
             string Universal = string.Empty;
@@ -787,8 +790,8 @@ namespace EcommerceMePiel.Datos
                 {
                     Con.Open();
 
-                    //DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
-                    DB = Get_Parameterizations("DbSap");
+                      DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+                    //DB = Get_Parameterizations("DbSap");
 
 
                     StrSql =
