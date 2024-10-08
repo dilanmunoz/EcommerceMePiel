@@ -1117,23 +1117,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ismael\\.nuget\\packages\\": {},
+    "C:\\Users\\dilan.munoz\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\EcommerceMePiel.csproj",
+      "projectUniqueName": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\EcommerceMePiel.csproj",
       "projectName": "EcommerceMePiel",
-      "projectPath": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\EcommerceMePiel.csproj",
-      "packagesPath": "C:\\Users\\Ismael\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\obj\\",
+      "projectPath": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\EcommerceMePiel.csproj",
+      "packagesPath": "C:\\Users\\dilan.munoz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ismael\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dilan.munoz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1210,7 +1210,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

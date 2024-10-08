@@ -10,7 +10,7 @@
     "Name" : "Oferta_Ventas_",
     "HanaServidor" : "172.16.21.249:30015",
     "SapDBpass" : "B1AdminH2",
-    "DBNameTest" : "SAPTESTAF",
+    "DBNameTest" : "TEST_SB1CSL",
     "UserSAP" : "VentasRepresentante",
     "PswSap" : "Mepiel123@",
     "Ip" : "172.16.21.1",

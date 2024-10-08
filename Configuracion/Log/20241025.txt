@@ -1,0 +1,4 @@
+
+25/10/2024 11:53:58 a. m. Error al obtener informacion del stock The input string '124.000000' was not in a correct format.
+
+25/10/2024 11:55:32 a. m. Error al obtener informacion del stock The input string '233.000000' was not in a correct format.

@@ -1,0 +1,14 @@
+
+16/10/2024 11:38:03 a. m. Error al obtener el cliente agrupador invalid table name:  Could not find table/view OCRD in schema SYSTEM: line 8 col 38 (at pos 661)
+
+16/10/2024 11:43:05 a. m. Error al obtener el cliente agrupador invalid table name:  Could not find table/view OCRD in schema SYSTEM: line 8 col 38 (at pos 661)
+
+16/10/2024 11:43:50 a. m. Error al obtener el cliente agrupador invalid table name:  Could not find table/view OCRD in schema SYSTEM: line 8 col 38 (at pos 661)
+
+16/10/2024 11:56:06 a. m. Error al obtener el cliente agrupador invalid table name:  Could not find table/view OCRD in schema SYSTEM: line 8 col 38 (at pos 661)
+
+16/10/2024 12:02:35 p. m. Error al obtener el cliente agrupador invalid table name:  Could not find table/view OCRD in schema SYSTEM: line 8 col 38 (at pos 661)
+
+16/10/2024 12:03:10 p. m. Error al obtener el cliente agrupador invalid table name:  Could not find table/view OCRD in schema SYSTEM: line 8 col 38 (at pos 661)
+
+16/10/2024 12:07:27 p. m. Error al obtener el cliente agrupador E_Mail

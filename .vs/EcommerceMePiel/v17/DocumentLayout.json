@@ -1,22 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\",
+  "WorkspaceRootPath": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\controllers\\ecommercecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:controllers\\ecommercecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\configuracion\\ajustes.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:configuracion\\ajustes.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\datos\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\dilan.munoz\\documents\\desarrollo_mepiel\\ecommercemepiel\\datos\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:datos\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|c:\\users\\abraham.jimenez\\desktop\\proyectos\\ecommercemepiel\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\dilan.munoz\\AppData\\Local\\Temp\\.vsdbgsrc\\6bef16858db6f2a5e406e796a1d2fd0989df0a7638d1d25e4cb78bb96c3eaac8\\HanaCommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\controllers\\ecommercecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:controllers\\ecommercecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\modelos\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:modelos\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\modelos\\articulosstock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9877A51E-8E97-4CE2-A0F8-464B1D32BFA2}|EcommerceMePiel.csproj|solutionrelative:modelos\\articulosstock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,62 +29,81 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Ajustes.txt",
-              "DocumentMoniker": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Configuracion\\Ajustes.txt",
-              "RelativeDocumentMoniker": "Configuracion\\Ajustes.txt",
-              "ToolTip": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Configuracion\\Ajustes.txt",
-              "RelativeToolTip": "Configuracion\\Ajustes.txt",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAcwBYAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-10-03T22:34:45.355Z",
-              "EditorCaption": ""
+              "Title": "HanaCommand.cs",
+              "DocumentMoniker": "C:\\Users\\dilan.munoz\\AppData\\Local\\Temp\\.vsdbgsrc\\6bef16858db6f2a5e406e796a1d2fd0989df0a7638d1d25e4cb78bb96c3eaac8\\HanaCommand.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\6bef16858db6f2a5e406e796a1d2fd0989df0a7638d1d25e4cb78bb96c3eaac8\\HanaCommand.cs",
+              "ToolTip": "C:\\Users\\dilan.munoz\\AppData\\Local\\Temp\\.vsdbgsrc\\6bef16858db6f2a5e406e796a1d2fd0989df0a7638d1d25e4cb78bb96c3eaac8\\HanaCommand.cs [Solo lectura]",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\6bef16858db6f2a5e406e796a1d2fd0989df0a7638d1d25e4cb78bb96c3eaac8\\HanaCommand.cs [Solo lectura]",
+              "ViewState": "AQIAAAUBAAAAAAAAAADgvyABAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T19:54:37.168Z",
+              "EditorCaption": " [Solo lectura]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAApwC4AAAAqAAAA",
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Modelos\\Producto.cs",
+              "RelativeDocumentMoniker": "Modelos\\Producto.cs",
+              "ToolTip": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Modelos\\Producto.cs",
+              "RelativeToolTip": "Modelos\\Producto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T16:23:29.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-24T20:40:04.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ArticulosStock.cs",
+              "DocumentMoniker": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Modelos\\ArticulosStock.cs",
+              "RelativeDocumentMoniker": "Modelos\\ArticulosStock.cs",
+              "ToolTip": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Modelos\\ArticulosStock.cs",
+              "RelativeToolTip": "Modelos\\ArticulosStock.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA8AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T19:29:18.355Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Data.cs",
-              "DocumentMoniker": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Datos\\Data.cs",
-              "RelativeDocumentMoniker": "Datos\\Data.cs",
-              "ToolTip": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Datos\\Data.cs",
-              "RelativeToolTip": "Datos\\Data.cs",
-              "ViewState": "AQIAACMBAAAAAAAAAAAWwGIDAABXAAAA",
+              "Title": "EcommerceController.cs",
+              "DocumentMoniker": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Controllers\\EcommerceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EcommerceController.cs",
+              "ToolTip": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Controllers\\EcommerceController.cs",
+              "RelativeToolTip": "Controllers\\EcommerceController.cs",
+              "ViewState": "AQIAAOUAAAAAAAAAAAAuwJsBAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T17:52:16.975Z",
+              "WhenOpened": "2024-09-25T17:41:21.85Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EcommerceController.cs",
-              "DocumentMoniker": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Controllers\\EcommerceController.cs",
-              "RelativeDocumentMoniker": "Controllers\\EcommerceController.cs",
-              "ToolTip": "C:\\Users\\abraham.jimenez\\Desktop\\Proyectos\\EcommerceMePiel\\Controllers\\EcommerceController.cs",
-              "RelativeToolTip": "Controllers\\EcommerceController.cs",
-              "ViewState": "AQIAAJEAAAAAAAAAAAAQwJgAAAAWAAAA",
+              "Title": "Data.cs",
+              "DocumentMoniker": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Datos\\Data.cs",
+              "RelativeDocumentMoniker": "Datos\\Data.cs",
+              "ToolTip": "C:\\Users\\dilan.munoz\\Documents\\Desarrollo_MEPiel\\EcommerceMePiel\\Datos\\Data.cs",
+              "RelativeToolTip": "Datos\\Data.cs",
+              "ViewState": "AQIAAD4CAAAAAAAAAAAiwPsCAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T17:41:21.85Z",
+              "WhenOpened": "2024-10-24T20:16:31.736Z",
               "EditorCaption": ""
             }
           ]

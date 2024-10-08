@@ -14,6 +14,7 @@ using System.Security;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace EcommerceMePiel.Datos
 {
@@ -113,13 +114,10 @@ namespace EcommerceMePiel.Datos
             catch (Exception ex)
             {
                 string error = "No fue posible obtener el parametro " + parameter + "." + ex.Message.ToString();
-
                 DateTime date = DateTime.Now;
                 string fechaFormateada = date.ToString("yyyyMMdd");
-
                 //Generar log
                 Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
-
                 //Avisar de error por correo
                 SendEmail(error);
 
@@ -291,7 +289,7 @@ namespace EcommerceMePiel.Datos
         #endregion
 
 
-        #region Metodos en servicio obtenerProductos
+        #region Obtener informacion SAP
 
         //Metodo para obtener productos de sap
         public static List<Producto> obtenerProductos(string productive)
@@ -392,7 +390,6 @@ namespace EcommerceMePiel.Datos
                                 Activo = reader.IsDBNull(7) ? "No data" : reader.GetString(7),
                                 Estatus = reader.IsDBNull(8) ? "No data" : reader.GetString(8),
                                 GrupoClientes = null,
-                                ImagenUrlProducto = null,
                                 //Categorias = obtenerCategoriasProducto(reader.IsDBNull(0) ? "No data" : reader.GetString(0), DB),
                             };
                             for (int i = 9; i <= 31; i++)
@@ -434,339 +431,6 @@ namespace EcommerceMePiel.Datos
             return Lista;
         }
 
-        //Metodo para obtener categorias de producto
-        //public static List<Categoria> obtenerCategoriasProducto(string itemCode, string Base)
-        //{
-        //    List<Categoria> lista = new List<Categoria>();
-        //    string Universal;
-
-        //    try
-        //    {
-        //        using (var Conn = new HanaConnection(Get_Parameterizations("HanaConec")))
-        //        {
-        //            Conn.Open();
-
-
-        //            string StrSql = $@"SELECT 
-
-        //                            CASE WHEN T0.""QryGroup1"" = 'Y' THEN 'Solares' ELSE '0' END AS ""Solares"", 
-        //                            CASE WHEN T0.""QryGroup2"" = 'Y' THEN 'Piel grasa' ELSE '0' END AS ""Piel grasa"", 
-        //                            CASE WHEN T0.""QryGroup3"" = 'Y' THEN 'Atópica' ELSE '0' END AS ""Atópica"", 
-        //                            CASE WHEN T0.""QryGroup4"" = 'Y' THEN 'Cicatrizante' ELSE '0' END AS ""Cicatrizante"", 
-        //                            CASE WHEN T0.""QryGroup5"" = 'Y' THEN 'Hidratante' ELSE '0' END AS ""Hidratante"", 
-        //                            CASE WHEN T0.""QryGroup6"" = 'Y' THEN 'Pediatrico' ELSE '0' END AS ""Pediatrico"", 
-        //                            CASE WHEN T0.""QryGroup7"" = 'Y' THEN 'Sensible' ELSE '0' END AS ""Sensible"", 
-        //                            CASE WHEN T0.""QryGroup8"" = 'Y' THEN 'Seca' ELSE '0' END AS ""Seca"", 
-        //                            CASE WHEN T0.""QryGroup9"" = 'Y' THEN 'Antiedad' ELSE '0' END AS ""Antiedad"", 
-        //                            CASE WHEN T0.""QryGroup10"" = 'Y' THEN 'Capilares' ELSE '0' END AS ""Capilares"", 
-        //                            CASE WHEN T0.""QryGroup11"" = 'Y' THEN 'Despigmentante' ELSE '0' END AS ""Despigmentante"", 
-        //                            CASE WHEN T0.""QryGroup12"" = 'Y' THEN 'Suplemento Alimenticio' ELSE '0' END AS ""Suplemento Alimenticio"", 
-        //                            CASE WHEN T0.""QryGroup13"" = 'Y' THEN 'Intima' ELSE'0' END AS ""Intima"", 
-        //                            CASE WHEN T0.""QryGroup14"" = 'Y' THEN 'Limpieza' ELSE '0' END AS ""Limpieza"", 
-        //                            CASE WHEN T0.""QryGroup15"" = 'Y' THEN 'Medico' ELSE '0' END AS ""Medico"", 
-        //                            CASE WHEN T0.""QryGroup16"" = 'Y' THEN 'Hombre' ELSE '0' END AS ""Hombre"", 
-        //                            CASE WHEN T0.""QryGroup17"" = 'Y' THEN 'Maquillaje' ELSE '0' END AS ""Maquillaje"", 
-        //                            CASE WHEN T0.""QryGroup18"" = 'Y' THEN 'Corporales' ELSE '0' END AS ""Corporales"", 
-        //                            CASE WHEN T0.""QryGroup19"" = 'Y' THEN 'Desodorante' ELSE '0' END AS ""Desodorante"", 
-        //                            CASE WHEN T0.""QryGroup20"" = 'Y' THEN 'Dermocosmetico' ELSE '0' END AS ""Dermocosmetico"", 
-        //                            CASE WHEN T0.""QryGroup21"" = 'Y' THEN 'Medicamento' ELSE '0' END AS ""Medicamento"", 
-        //                            CASE WHEN T0.""QryGroup22"" = 'Y' THEN 'Oftalmología' ELSE '0' END AS ""Oftalmología"",
-        //                            CASE WHEN T0.""QryGroup23"" = 'Y' THEN 'Dispositivo' ELSE '0' END AS ""Dispositivo""
-
-        //                            FROM 
-        //                            {Base}.OITM T0
-
-        //                            WHERE 
-        //                                T0.""ItemCode"" = '{itemCode}'";
-
-        //            using (var cmd = new HanaCommand(StrSql, Conn))
-        //            using (var reader = cmd.ExecuteReader())
-        //            {
-
-        //                while (reader.Read())
-        //                {
-
-        //                    //1
-        //                    Universal = reader.GetString(0);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //2
-        //                    Universal = reader.GetString(1);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //3
-        //                    Universal = reader.GetString(2);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //4
-        //                    Universal = reader.GetString(3);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //5
-        //                    Universal = reader.GetString(4);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //6
-        //                    Universal = reader.GetString(5);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //7
-        //                    Universal = reader.GetString(6);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //8
-        //                    Universal = reader.GetString(7);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //9
-        //                    Universal = reader.GetString(8);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //10
-        //                    Universal = reader.GetString(9);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //11
-        //                    Universal = reader.GetString(10);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //12
-        //                    Universal = reader.GetString(11);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //13
-        //                    Universal = reader.GetString(12);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //14
-        //                    Universal = reader.GetString(13);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //15
-        //                    Universal = reader.GetString(14);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //16
-        //                    Universal = reader.GetString(15);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //17
-        //                    Universal = reader.GetString(16);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //18
-        //                    Universal = reader.GetString(17);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //19
-        //                    Universal = reader.GetString(18);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //20
-        //                    Universal = reader.GetString(19);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //21
-        //                    Universal = reader.GetString(20);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //22
-        //                    Universal = reader.GetString(21);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                    //23
-        //                    Universal = reader.GetString(22);
-        //                    if (Universal != "0")
-        //                    {
-        //                        var categoria = new Categoria
-        //                        {
-        //                            categoria = Universal,
-        //                        };
-        //                        lista.Add(categoria);
-        //                    }
-
-        //                }
-
-        //                // Procesar listClients según sea necesario
-        //            }
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string error = "Error al obtener propertys de articulo " + ex.Message.ToString();
-
-        //        DateTime date = DateTime.Now;
-        //        string fechaFormateada = date.ToString("yyyyMMdd");
-
-        //        //Generar log
-        //        Log(_path + @"Log\" + fechaFormateada + ".txt", error);
-
-        //        return new List<Categoria>();
-        //    }
-
-        //    return lista;
-        //}
-
-        //Metodo para aumentar tamaño
-
-        #endregion
-
-
         #region Metodos en servicio GetDocument
 
         protected static readonly string Path_Pdf = "\\\\172.16.21.249\\b1_shf\\Companies\\SB1CSL\\anexos\\BOVEDA FACTURAS MEPIEL\\";
@@ -790,7 +454,7 @@ namespace EcommerceMePiel.Datos
                 {
                     Con.Open();
 
-                      DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+                    DB = productive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
                     //DB = Get_Parameterizations("DbSap");
 
 
@@ -858,7 +522,7 @@ WHERE
             var Full_Path_Pdf = Path_Pdf + $@"{Data.CardName}\I\";
             var Full_Path_Xml = Path_Xml + $@"{Data.Date}\{Data.CardCode}\RF\";
 
-            Documentos documentos = ReadFiles(Full_Path_Pdf, Full_Path_Xml,Data.UUID);
+            Documentos documentos = ReadFiles(Full_Path_Pdf, Full_Path_Xml, Data.UUID);
 
             return documentos;
         }
@@ -910,8 +574,430 @@ WHERE
 
         }
 
+
         #endregion
 
+        #region Obtener Clientes SAP
+        internal static List<ClientePadre> ConsultaClientes(string sProductive)
+        {
+            List<ClientePadre> lsClientePadre = new List<ClientePadre>();
 
+            try
+            {
+                // Obtener los clientes agrupadores
+                lsClientePadre = ConsultaClientesPadre(sProductive);
+
+                // Validamos que la lista no este vacia
+                if (lsClientePadre.Count > 0)
+                {
+                    foreach (ClientePadre oClientePadre in lsClientePadre)
+                    {
+                        List<ClienteHijo> lsClienteHijo = new List<ClienteHijo>();
+                        lsClienteHijo = ObtenerClientesHijo(sProductive, oClientePadre.Email);
+
+                        oClientePadre.ClientesRelacionados = lsClienteHijo;
+                    }
+                }
+                return lsClientePadre;
+            }
+            catch (Exception ex)
+            {
+                string error = "Error al obtener listado de Clientes " + ex.Message.ToString();
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+
+                return new List<ClientePadre>();
+            }
+        }
+
+        private static List<ClientePadre> ConsultaClientesPadre(string sProductive)
+        {
+            string Universal = string.Empty;
+            string DB = string.Empty;
+            string StrSql = string.Empty;
+            List<ClientePadre> lsClientePadre = new List<ClientePadre>();
+
+            try
+            {
+                //Conexion a SAP
+                //Con = new HanaConnection(Get_Parameterizations("HanaConec"));
+                using (var Con = new HanaConnection(Get_Parameterizations("HanaConec")))
+                {
+                    Con.Open();
+                    DB = sProductive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+
+                    StrSql = $@"SELECT DISTINCT LOWER(T0.""E_Mail"") ""Email"", T0.""U_CodigoAgrupador"" ""CodigoAgrupador"", T2.""GroupName"" ""GrupoCliente"", 
+	                                CASE WHEN T0.""QryGroup4"" = 'Y' THEN TPR4.""GroupName""
+		                                 WHEN T0.""QryGroup5"" = 'Y' THEN TPR5.""GroupName""
+		                                 WHEN T0.""QryGroup6"" = 'Y' THEN TPR6.""GroupName""
+		                                 WHEN T0.""QryGroup7"" = 'Y' THEN TPR7.""GroupName""
+		                                 WHEN T0.""QryGroup8"" = 'Y' THEN TPR8.""GroupName"" 
+		 	                                ELSE 'N/A' END AS ""ZonaCliente""
+                                FROM {DB}.OCRD T0
+                                INNER JOIN {DB}.OCPR T1 ON T0.""CardCode"" = T1.""CardCode""
+                                INNER JOIN {DB}.OCRG T2 ON T0.""GroupCode"" = T2.""GroupCode""
+                                LEFT JOIN {DB}.OCQG TPR4 ON TPR4.""GroupCode"" = 4 AND T0.""QryGroup4"" = 'Y'
+                                LEFT JOIN {DB}.OCQG TPR5 ON TPR5.""GroupCode"" = 5 AND T0.""QryGroup5"" = 'Y'
+                                LEFT JOIN {DB}.OCQG TPR6 ON TPR6.""GroupCode"" = 6 AND T0.""QryGroup6"" = 'Y'
+                                LEFT JOIN {DB}.OCQG TPR7 ON TPR7.""GroupCode"" = 7 AND T0.""QryGroup7"" = 'Y'
+                                LEFT JOIN {DB}.OCQG TPR8 ON TPR8.""GroupCode"" = 8 AND T0.""QryGroup8"" = 'Y'
+                                WHERE (T0.""U_CodigoAgrupador"" = 'C001' OR T0.""U_CodigoAgrupador"" = 'C002' OR T0.""U_CodigoAgrupador"" = 'C003') 
+	                                AND T0.""E_Mail"" != '0'";
+
+
+                    using (var cmd = new HanaCommand(StrSql, Con))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ClientePadre oClientePadre = new ClientePadre();
+
+                            //Datos generales
+                            if (!string.IsNullOrEmpty(reader["Email"].ToString()) && Regex.IsMatch(reader.GetString(0), "@"))
+                                oClientePadre.Email = reader.GetString(0);
+                            if (!string.IsNullOrEmpty(reader["CodigoAgrupador"].ToString()))
+                                oClientePadre.CodigoAgrupador = reader["CodigoAgrupador"].ToString();
+                            if (!string.IsNullOrEmpty(reader["GrupoCliente"].ToString()))
+                                oClientePadre.TipoCliente = reader["GrupoCliente"].ToString();
+                            if (!string.IsNullOrEmpty(reader["ZonaCliente"].ToString()))
+                                oClientePadre.ZonaCliente = reader["ZonaCliente"].ToString();
+
+                            if (!string.IsNullOrEmpty(oClientePadre.Email) && !string.IsNullOrEmpty(oClientePadre.CodigoAgrupador) && !string.IsNullOrEmpty(oClientePadre.TipoCliente) && !string.IsNullOrEmpty(oClientePadre.TipoCliente))
+                                lsClientePadre.Add(oClientePadre);
+                        }
+
+                        return lsClientePadre;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = "Error al obtener el cliente agrupador " + ex.Message.ToString();
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+                return new List<ClientePadre>();
+            }
+        }
+
+        private static List<ClienteHijo> ObtenerClientesHijo(string sProductive, string sEmail)
+        {
+            string Universal = string.Empty;
+            string DB = string.Empty;
+            string StrSql = string.Empty;
+            List<ClienteHijo> lsClienteHijo = new List<ClienteHijo>();
+
+            try
+            {
+                // Obtenemos la informacion general del cliente
+                using (var Con = new HanaConnection(Get_Parameterizations("HanaConec")))
+                {
+                    Con.Open();
+                    DB = sProductive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+
+                    StrSql = $@"SELECT ""CardCode"" ""CodigoCliente"", ""CardName"" ""NombreCliente"",
+	                            ""LicTradNum"" ""RFC"", ""U_Almacen"" ""Almacen"", ""QryGroup2"" ""Credito""
+	                            FROM {DB}.OCRD 
+	                            WHERE LOWER (""E_Mail"") = '" + sEmail + "'";
+
+                    // Se obtiene la informacion general del cliente hijo
+                    using (var cmd = new HanaCommand(StrSql, Con))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ClienteHijo oClienteHijo = new ClienteHijo();
+
+                            //Datos generales
+                            if (!string.IsNullOrEmpty(reader["CodigoCliente"].ToString()))
+                                oClienteHijo.CodigoCliente = reader["CodigoCliente"].ToString();
+                            if (!string.IsNullOrEmpty(reader["NombreCliente"].ToString()))
+                                oClienteHijo.NombreCliente = reader["NombreCliente"].ToString();
+                            if (!string.IsNullOrEmpty(reader["RFC"].ToString()))
+                                oClienteHijo.RFC = reader["RFC"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Almacen"].ToString()))
+                                oClienteHijo.Almacen = reader["Almacen"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Credito"].ToString()))
+                            {
+                                oClienteHijo.Credito = false;
+                                if (reader["Credito"].ToString().Equals("Y"))
+                                    oClienteHijo.Credito = true;
+                            }
+
+                            // Obtenemos la direccion Factura del cliente
+                            oClienteHijo.DireccionFactura = ObtenerDireccionFactura(sProductive, oClienteHijo.CodigoCliente);
+
+                            // Obtenemos las direcciones de Entrega del cliente
+                            oClienteHijo.DireccionesEntrega = ObtenerDireccionEntrega(sProductive, oClienteHijo.CodigoCliente);
+
+                            // Se agrega cada cliente hijo al proceso
+                            lsClienteHijo.Add(oClienteHijo);
+
+                        }
+                    }
+
+                    return lsClienteHijo;
+                }
+            }
+            catch (Exception ex)
+            {
+                string error = "Error al obtener el cliente agrupador " + ex.Message.ToString();
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+                return new List<ClienteHijo>();
+            }
+        }
+
+        private static Direccion ObtenerDireccionFactura(string sProductive, object sCardCode)
+        {
+            string Universal = string.Empty;
+            string DB = string.Empty;
+            string StrSql = string.Empty;
+            Direccion oDireccionFactura = new Direccion();
+
+            try
+            {
+                // Obtenemos la informacion general del cliente
+                using (var Con = new HanaConnection(Get_Parameterizations("HanaConec")))
+                {
+                    Con.Open();
+                    DB = sProductive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+
+                    StrSql = $@"SELECT ""Address"" ""CodigoDireccion"", ""Street"" ""Calle"", ""Block"" ""Colonia"", 
+	                                ""ZipCode"" ""CP"", ""City"" ""Ciudad"", ""State"" ""Estado"", ""Country"" ""Pais""
+                                FROM {DB}.CRD1 
+                                WHERE ""AdresType"" = 'B' AND  ""CardCode"" = '" + sCardCode + "' ";
+
+                    // Se obtiene la informacion general del cliente hijo
+                    using (var cmd = new HanaCommand(StrSql, Con))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            //Datos generales
+                            if (!string.IsNullOrEmpty(reader["CodigoDireccion"].ToString()))
+                                oDireccionFactura.CodigoDireccion = reader["CodigoDireccion"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Calle"].ToString()))
+                                oDireccionFactura.Calle = reader["Calle"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Colonia"].ToString()))
+                                oDireccionFactura.Colonia = reader["Colonia"].ToString();
+                            if (!string.IsNullOrEmpty(reader["CP"].ToString()))
+                                oDireccionFactura.CP = reader["CP"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Ciudad"].ToString()))
+                                oDireccionFactura.Ciudad = reader["Ciudad"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Estado"].ToString()))
+                                oDireccionFactura.Estado = reader["Estado"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Pais"].ToString()))
+                                oDireccionFactura.Pais = reader["Pais"].ToString();
+                        }
+                    }
+                }
+                return oDireccionFactura;
+            }
+            catch (Exception ex)
+            {
+                string error = "Error al obtener informacion de direccion del cliente " + ex.Message.ToString();
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+                return new Direccion();
+            }
+        }
+
+        private static List<Direccion> ObtenerDireccionEntrega(string sProductive, object sCardCode)
+        {
+            string Universal = string.Empty;
+            string DB = string.Empty;
+            string StrSql = string.Empty;
+            List<Direccion> lsDireccionesEntrega = new List<Direccion>();
+
+            try
+            {
+                // Obtenemos la informacion general del cliente
+                using (var Con = new HanaConnection(Get_Parameterizations("HanaConec")))
+                {
+                    Con.Open();
+                    DB = sProductive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+
+                    StrSql = $@"SELECT ""Address"" ""CodigoDireccion"", ""Street"" ""Calle"", ""Block"" ""Colonia"", 
+	                                ""ZipCode"" ""CP"", ""City"" ""Ciudad"", ""State"" ""Estado"", ""Country"" ""Pais""
+                                FROM {DB}.CRD1 
+                                WHERE ""AdresType"" != 'B' AND ""CardCode"" = '" + sCardCode + "' ";
+
+                    // Se obtiene la informacion general del cliente hijo
+                    using (var cmd = new HanaCommand(StrSql, Con))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Direccion oDireccionEntrega = new Direccion();
+                            //Datos generales
+                            if (!string.IsNullOrEmpty(reader["CodigoDireccion"].ToString()))
+                                oDireccionEntrega.CodigoDireccion = reader["CodigoDireccion"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Calle"].ToString()))
+                                oDireccionEntrega.Calle = reader["Calle"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Colonia"].ToString()))
+                                oDireccionEntrega.Colonia = reader["Colonia"].ToString();
+                            if (!string.IsNullOrEmpty(reader["CP"].ToString()))
+                                oDireccionEntrega.CP = reader["CP"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Ciudad"].ToString()))
+                                oDireccionEntrega.Ciudad = reader["Ciudad"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Estado"].ToString()))
+                                oDireccionEntrega.Estado = reader["Estado"].ToString();
+                            if (!string.IsNullOrEmpty(reader["Pais"].ToString()))
+                                oDireccionEntrega.Pais = reader["Pais"].ToString();
+
+                            lsDireccionesEntrega.Add(oDireccionEntrega);
+                        }
+                    }
+                }
+                return lsDireccionesEntrega;
+            }
+            catch (Exception ex)
+            {
+                string error = "Error al obtener informacion de direccion del cliente " + ex.Message.ToString();
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+                return new List<Direccion>();
+            }
+        }
+
+        internal static List<ArticulosStock> ConsultaStocks(string sProductive)
+        {
+            string Universal = string.Empty;
+            string DB = string.Empty;
+            string StrSql = string.Empty;
+            List<ArticulosStock> lsArticulosStock = new List<ArticulosStock>();
+
+            try
+            {
+                // Obtenemos la informacion general del cliente
+                using (var Con = new HanaConnection(Get_Parameterizations("HanaConec")))
+                {
+                    Con.Open();
+                    DB = sProductive == "YES" ? Get_Parameterizations("DbSap") : Get_Parameterizations("DBNameTest");
+
+                    StrSql = $@"CALL {DB}.MP_ECOMMERCE_CONSULTA_STOCK";
+
+                    // Se obtiene la informacion general del cliente hijo
+                    using (var cmd = new HanaCommand(StrSql, Con))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ArticulosStock oArticulo = new ArticulosStock();
+                            //Datos generales
+                            if (!string.IsNullOrEmpty(reader["ItemCode"].ToString()))
+                                oArticulo.CodigoSAP = reader["ItemCode"].ToString();
+                            if (!string.IsNullOrEmpty(reader["CodeBars"].ToString()))
+                                oArticulo.SKU = reader["CodeBars"].ToString();
+
+
+                            //Datos a por stock normal
+                            List<StockPorAlmacen> lsStock = new List<StockPorAlmacen>();
+                            StockPorAlmacen oStockArticulo = new StockPorAlmacen();      
+                            if(!string.IsNullOrEmpty(reader["DisponibleAlmacen01NO"].ToString()))
+                            {
+                                oStockArticulo = new StockPorAlmacen();
+                                oStockArticulo.CodigoAlmacen = "01";
+                                oStockArticulo.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen01NO"]);
+                                lsStock.Add(oStockArticulo);
+                            }
+                            if (!string.IsNullOrEmpty(reader["DisponibleAlmacen02NO"].ToString()))
+                            {
+                                oStockArticulo = new StockPorAlmacen();
+                                oStockArticulo.CodigoAlmacen = "02";
+                                oStockArticulo.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen02NO"]);
+                                lsStock.Add(oStockArticulo);
+                            }
+                            if (!string.IsNullOrEmpty(reader["DisponibleAlmacen03NO"].ToString()))
+                            {
+                                oStockArticulo = new StockPorAlmacen();
+                                oStockArticulo.CodigoAlmacen = "03";
+                                oStockArticulo.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen03NO"]);
+                                lsStock.Add(oStockArticulo);
+                            }
+                            if (!string.IsNullOrEmpty(reader["DisponibleAlmacen05NO"].ToString()))
+                            {
+                                oStockArticulo = new StockPorAlmacen();
+                                oStockArticulo.CodigoAlmacen = "05";
+                                oStockArticulo.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen05NO"]);
+                                lsStock.Add(oStockArticulo);
+                            }
+                            oArticulo.Stock = lsStock;
+
+                            //Datos a por stock Fecha corta
+                            List<StockPorAlmacen> lsStockFechaCorta = new List<StockPorAlmacen>();
+                            StockPorAlmacen oStockArticuloFechaCorta = new StockPorAlmacen();
+                            if (!string.IsNullOrEmpty(reader["DisponibleAlmacen01SI"].ToString()) && Convert.ToInt32(reader["DisponibleAlmacen01SI"]) > 0)
+                            {
+                                oStockArticuloFechaCorta = new StockPorAlmacen();
+                                oStockArticuloFechaCorta.CodigoAlmacen = "01";
+                                oStockArticuloFechaCorta.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen01SI"]);
+                                lsStockFechaCorta.Add(oStockArticuloFechaCorta);
+                            }
+                            if (!string.IsNullOrEmpty(reader["DisponibleAlmacen02SI"].ToString()) && Convert.ToInt32(reader["DisponibleAlmacen02SI"]) > 0)
+                            {
+                                oStockArticuloFechaCorta = new StockPorAlmacen();
+                                oStockArticuloFechaCorta.CodigoAlmacen = "02";
+                                oStockArticuloFechaCorta.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen02SI"]);
+                                lsStockFechaCorta.Add(oStockArticuloFechaCorta);
+                            }
+                            if (!string.IsNullOrEmpty(reader["DisponibleAlmacen03SI"].ToString()) && Convert.ToInt32(reader["DisponibleAlmacen03SI"]) > 0)
+                            {
+                                oStockArticuloFechaCorta = new StockPorAlmacen();
+                                oStockArticuloFechaCorta.CodigoAlmacen = "03";
+                                oStockArticuloFechaCorta.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen03SI"]);
+                                lsStockFechaCorta.Add(oStockArticuloFechaCorta);
+                            }
+                            if (!string.IsNullOrEmpty(reader["DisponibleAlmacen05SI"].ToString()) && Convert.ToInt32(reader["DisponibleAlmacen05SI"]) > 0)
+                            {
+                                oStockArticuloFechaCorta = new StockPorAlmacen();
+                                oStockArticuloFechaCorta.CodigoAlmacen = "05";
+                                oStockArticuloFechaCorta.Cantidad = Convert.ToInt32(reader["DisponibleAlmacen05SI"]);
+                                lsStockFechaCorta.Add(oStockArticuloFechaCorta);
+                            }
+                            oArticulo.StockFechaCorta = lsStockFechaCorta;
+
+                            lsArticulosStock.Add(oArticulo);
+                        }
+                    }
+                }
+                return lsArticulosStock;
+            }
+            catch (Exception ex)
+            {
+                string error = "Error al obtener informacion del stock " + ex.Message.ToString();
+
+                DateTime date = DateTime.Now;
+                string fechaFormateada = date.ToString("yyyyMMdd");
+
+                //Generar log
+                Log(_path + @"\Configuracion\Log\" + fechaFormateada + ".txt", error);
+                return new List<ArticulosStock>();
+            }
+        }
+
+        #endregion
+
+        #endregion
     }
 }

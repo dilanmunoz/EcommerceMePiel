@@ -17,9 +17,6 @@ namespace EcommerceMePiel.Modelos
         [JsonProperty("Descripcion")]
         public string Descripcion { get; set; }
         [Required]
-        [JsonProperty("ImagenUrlProducto")]
-        public string ImagenUrlProducto { get; set; }
-        [Required]
         [JsonProperty("Categorias")]
         public List<string> Categorias { get; set; }
         [Required]

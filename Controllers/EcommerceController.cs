@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Linq;
 using EcommerceMePiel.Filtros;
 using System.Diagnostics.Eventing.Reader;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 
 namespace EcommerceMePiel.Controllers
@@ -15,10 +16,7 @@ namespace EcommerceMePiel.Controllers
     [ApiController]
     public class EcommerceController : ControllerBase
     {
-
-
-        //[HttpGet]
-        [HttpGet("GetToken/{usuario},{contraseña}", Name = "GetToken")]
+        [HttpGet]
         [SwaggerOperation(
         Summary = "Obtener Token",
         Description = "Este servicio se encarga de generar un token a partir de un usuario y contraseña.")]
@@ -26,7 +24,7 @@ namespace EcommerceMePiel.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //[Route("GetToken")]
+        [Route("GetToken")]
         public IActionResult GetToken(string usuario, string contraseña)
         {
             try
@@ -38,7 +36,7 @@ namespace EcommerceMePiel.Controllers
                     response.Exito = false;
 
                     Conflicto conflicto = new Conflicto();
-                    conflicto.Descripcion = "Es nesesario incluir un usuario y/o contraseña";
+                    conflicto.Descripcion = "Es necesario incluir un usuario y/o contraseña";
                     conflicto.Codigo = 404;
 
                     response.Respuesta = conflicto;
@@ -82,20 +80,10 @@ namespace EcommerceMePiel.Controllers
         [Route("GetProducts")]
         public IActionResult obtenerProductos(/*[FromHeader(Name = "Authorization")] string Authorization*/)
         {
-            //string Authorization = Request.Headers.Where(x => x.Key == "Authorization").FirstOrDefault().Value;
             string Authorization = Request.Headers["Authorization"];
 
             try
             {
-                //foreach (var item in httpRequest.Headers)
-                //{
-                //    if (item.Key.Equals("Authorization"))
-                //    {
-                //        Authorization = item.Value.First();
-                //        break;
-                //    }
-                //}
-
                 if (!string.IsNullOrEmpty(Authorization))
                 {
                     Authorization = Authorization.Replace("Bearer ", "");
@@ -135,7 +123,7 @@ namespace EcommerceMePiel.Controllers
                             return Ok(response);
                         }
                     }
-                    else if(ValidTokenTest == Authorization)
+                    else if (ValidTokenTest == Authorization)
                     {
                         List<Producto> a = Data.obtenerProductos("NO");
 
@@ -168,14 +156,13 @@ namespace EcommerceMePiel.Controllers
                     else
                     {
                         Response<Conflicto> response = new Response<Conflicto>();
+                        Conflicto oConflicto = new Conflicto();
+                        oConflicto.Descripcion = "Es necesario incluir un token valido";
+                        oConflicto.Codigo = 404;
+
                         response.Exito = false;
-
-                        Conflicto conflicto = new Conflicto();
-                        conflicto.Descripcion = "Es nesesario incluir un token valido";
-                        conflicto.Codigo = 404;
-
-                        response.Respuesta = conflicto;
-                        return NotFound(response);
+                        response.Respuesta = oConflicto;
+                        return Unauthorized(response);
                     }
                 }
                 else
@@ -184,7 +171,7 @@ namespace EcommerceMePiel.Controllers
                     response.Exito = false;
 
                     Conflicto conflicto = new Conflicto();
-                    conflicto.Descripcion = "Es nesesario incluir un token";
+                    conflicto.Descripcion = "Es necesario incluir un token";
                     conflicto.Codigo = 404;
 
                     response.Respuesta = conflicto;
@@ -203,7 +190,7 @@ namespace EcommerceMePiel.Controllers
                 response.Respuesta = conflicto;
                 return StatusCode(500, response);
             }
-            
+
         }
 
 
@@ -253,7 +240,7 @@ namespace EcommerceMePiel.Controllers
                     response.Exito = false;
 
                     Conflicto conflicto = new Conflicto();
-                    conflicto.Descripcion = "Es nesesario incluir el numero de factura.";
+                    conflicto.Descripcion = "Es necesario incluir el numero de factura.";
                     conflicto.Codigo = 404;
 
                     response.Respuesta = conflicto;
@@ -275,7 +262,7 @@ namespace EcommerceMePiel.Controllers
                         {
 
                             // LLamado de funcion para traer DocNumData
-                            DocNumData data = Data.GetDocumentData(DocNum,"YES");
+                            DocNumData data = Data.GetDocumentData(DocNum, "YES");
 
                             if (data.Equals(null) || data.UUID == null || data.UUID == "")
                             {
@@ -293,7 +280,7 @@ namespace EcommerceMePiel.Controllers
                             // LLamado de funcion para traer documentos
                             var Documentos = Data.GetDocumentos(data);
 
-                            if (Documentos.Equals(null)|| Documentos.PDF_Base64 == null)
+                            if (Documentos.Equals(null) || Documentos.PDF_Base64 == null)
                             {
                                 Response<Conflicto> response = new Response<Conflicto>();
                                 response.Exito = false;
@@ -308,10 +295,10 @@ namespace EcommerceMePiel.Controllers
 
                             return Ok(Documentos);
                         }
-                        else if(ValidTokenTest == Authorization)
+                        else if (ValidTokenTest == Authorization)
                         {
                             // LLamado de funcion para traer DocNumData
-                            DocNumData data = Data.GetDocumentData(DocNum,"NO");
+                            DocNumData data = Data.GetDocumentData(DocNum, "NO");
 
                             if (data.Equals(null) || data.UUID == null || data.UUID == "")
                             {
@@ -350,7 +337,7 @@ namespace EcommerceMePiel.Controllers
                             response.Exito = false;
 
                             Conflicto conflicto = new Conflicto();
-                            conflicto.Descripcion = "Es nesesario incluir un token valido";
+                            conflicto.Descripcion = "Es necesario incluir un token valido";
                             conflicto.Codigo = 404;
 
                             response.Respuesta = conflicto;
@@ -363,7 +350,7 @@ namespace EcommerceMePiel.Controllers
                         response.Exito = false;
 
                         Conflicto conflicto = new Conflicto();
-                        conflicto.Descripcion = "Es nesesario incluir un token";
+                        conflicto.Descripcion = "Es necesario incluir un token";
                         conflicto.Codigo = 404;
 
                         response.Respuesta = conflicto;
@@ -386,5 +373,150 @@ namespace EcommerceMePiel.Controllers
         }
 
 
+        [HttpGet]
+        [SwaggerOperation(
+        Summary = "Obtener Clientes SAP.",
+        Description = "Servicio encargado de consultar todos los clientes activos en SAP, con la caracteristica de Ecommerce='Si'")]
+        [ResponseCache(Duration = 10)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("GetClients")]
+        public IActionResult GetClients()
+        {
+            string Authorization = Request.Headers["Authorization"];
+            Response<ClientePadre> oResponseClientes = new Response<ClientePadre>();
+            Response<Conflicto> oResponseConflicto = new Response<Conflicto>();
+
+            try
+            {
+                if (string.IsNullOrEmpty(Authorization))
+                {
+                    oResponseConflicto.Exito = false;
+
+                    Conflicto oConflicto = new Conflicto();
+                    oConflicto.Descripcion = "Es necesario incluir un token valido";
+                    oConflicto.Codigo = 404;
+                    oResponseConflicto.Respuesta = oConflicto;
+
+                    return NotFound(oResponseConflicto);
+                }
+
+                Authorization = Authorization.Replace("Bearer ", "");
+                string ValidToken = Data.Get_Parameterizations("Token");
+                string ValidTokenTest = Data.Get_Parameterizations("TokenTest");
+
+                // Validacion de Token en productivo
+                if (ValidToken == Authorization)
+                {
+                    List<ClientePadre> lsClientes = Data.ConsultaClientes("YES");
+                    if (lsClientes.Count < 1)
+                    {
+                        Response<Conflicto> response = new Response<Conflicto>();
+                        response.Exito = false;
+                        response.Respuesta.Descripcion = "Error al obtener listado de productos";
+                        response.Respuesta.Codigo = 404;
+                        return NotFound(response);
+                    }
+                    else
+                    {
+                        Response<List<ClientePadre>> response = new Response<List<ClientePadre>>()
+                        {
+                            Exito = true,
+                            Respuesta = lsClientes
+                        };
+                        return Ok(response);
+                    }
+                }else
+                {
+                    Response<Conflicto> response = new Response<Conflicto>();
+                    Conflicto oConflicto = new Conflicto();
+                    oConflicto.Descripcion = "Es necesario incluir un token valido";
+                    oConflicto.Codigo = 404;
+
+                    response.Exito = false;
+                    response.Respuesta = oConflicto;
+                    return Unauthorized(response); 
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        
+        [HttpGet]
+        [SwaggerOperation(
+        Summary = "Obtener Stock SAP.",
+        Description = "Servicio encargado de consultar el Stock completo por almacen")]
+        [ResponseCache(Duration = 10)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("GetStocks")]
+        public IActionResult GetStocks()
+        {
+            string Authorization = Request.Headers["Authorization"];
+            Response<ArticulosStock> oResponseStock = new Response<ArticulosStock>();
+            Response<Conflicto> oResponseConflicto = new Response<Conflicto>();
+
+            try
+            {
+                if (string.IsNullOrEmpty(Authorization))
+                {
+                    oResponseConflicto.Exito = false;
+
+                    Conflicto oConflicto = new Conflicto();
+                    oConflicto.Descripcion = "Es necesario incluir un token valido";
+                    oConflicto.Codigo = 404;
+                    oResponseConflicto.Respuesta = oConflicto;
+
+                    return NotFound(oResponseConflicto);
+                }
+
+                Authorization = Authorization.Replace("Bearer ", "");
+                string ValidToken = Data.Get_Parameterizations("Token");
+                string ValidTokenTest = Data.Get_Parameterizations("TokenTest");
+
+                // Validacion de Token en productivo
+                if (ValidToken == Authorization)
+                {
+                    List<ArticulosStock> lsArticuloStock = Data.ConsultaStocks("YES");
+                    if (lsArticuloStock.Count < 1)
+                    {
+                        Response<Conflicto> response = new Response<Conflicto>();
+                        response.Exito = false;
+                        response.Respuesta.Descripcion = "Error al obtener listado de productos";
+                        response.Respuesta.Codigo = 404;
+                        return NotFound(response);
+                    }
+                    else
+                    {
+                        Response<List<ArticulosStock>> response = new Response<List<ArticulosStock>>()
+                        {
+                            Exito = true,
+                            Respuesta = lsArticuloStock
+                        };
+                        return Ok(response);
+                    }
+                }
+                else
+                {
+                    Response<Conflicto> response = new Response<Conflicto>();
+                    Conflicto oConflicto = new Conflicto();
+                    oConflicto.Descripcion = "Es necesario incluir un token valido";
+                    oConflicto.Codigo = 401;
+
+                    response.Exito = false;
+                    response.Respuesta = oConflicto;
+                    return Unauthorized(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }
