@@ -17,8 +17,8 @@ namespace EcommerceMePiel.Controllers
     {
 
 
-        //[HttpGet]
-        [HttpGet("GetToken/{usuario},{contraseña}", Name = "GetToken")]
+        [HttpGet]
+        ///[HttpGet("GetToken/{usuario},{contraseña}", Name = "GetToken")]
         [SwaggerOperation(
         Summary = "Obtener Token",
         Description = "Este servicio se encarga de generar un token a partir de un usuario y contraseña.")]
@@ -26,7 +26,7 @@ namespace EcommerceMePiel.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //[Route("GetToken")]
+        [Route("GetToken")]
         public IActionResult GetToken(string usuario, string contraseña)
         {
             try
